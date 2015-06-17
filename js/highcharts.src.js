@@ -3997,11 +3997,23 @@
 
             renderer.width = width;
             renderer.height = height;
+    
+            var options = {},
+            key = pick(animate, true) ? 'animate' : 'attr';
+    
+            if (key === 'attr') {
+              if (typeof width !== 'undefined' && width !== null) {
+                options.width = width;
+              }
+              if (typeof height !== 'undefined' && height !== null) {
+                options.height = height;
+              }
+            } else {
+              options.width = width;
+              options.height = height;
+            }
 
-            renderer.boxWrapper[pick(animate, true) ? 'animate' : 'attr']({
-                width: width,
-                height: height
-            });
+            renderer.boxWrapper[key](options);
 
             while (i--) {
                 alignedObjects[i].align();
